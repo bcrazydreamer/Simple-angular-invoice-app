@@ -12,13 +12,15 @@ var createRecord = async function (data,callback) {
   var payload={};
   payload.itemname                = data.itemname;
   payload.createDate               = data.createDate;
+  payload.price                   = data.price;
   if(data.type){
       payload.type                  = data.type;
+      payload.priceWithGst     = Number(data.price)+(Number(data.price)*(Number(helper.AppConstant.gst[data.type])))/100;
   }
   if(data.dealer){
     payload.dealer                  = data.dealer;
   }
-  payload.price                   = data.price;
+
   try{
       let Records = new models.Records(payload);
       var response = await Records.save();

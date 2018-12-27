@@ -21,8 +21,13 @@ var recordModel = mongoose.Schema({
     dealer : {
       type : String,
       default : "Not Avilable"
+    },
+    priceWithGst : {
+      type : String,
+      default : "Not Avilable"
     }
-},
+}, { 'timestamps' : true }
 );
+recordModel.index({'itemname' : 1 }, { 'background' : true } );
 
 module.exports= mongoose.model("record",recordModel);

@@ -24,7 +24,8 @@
   	<input type="text" class="custom-input" ng-model="searchText" placeholder="Global search">
   	<input type="text" class="custom-input" ng-model="searchText.itemname" placeholder="Search by name">
   	<input type="text" class="custom-input" ng-model="searchText.type" placeholder="Search by type">
-    <input type="checkbox" ng-model="hideButton">Hide Buttons
+    <input type="checkbox" ng-model="hideButton">
+        <span style="color:#ffffff;font-weight:bold;">Hide Buttons</span>
     <br />
     <button class="btn btn-primary btn-sm refresh-btn allSides" ng-click="refreshList()">Refresh</button>
     <button class="btn btn-primary btn-sm print-btn allSides" onclick="printTable()">Print</button>
@@ -35,6 +36,7 @@
           <th>Type</th>
           <th>Dealer</th>
           <th>Price</th>
+          <th>Price(GST)</th>
           <th>Entry Date</th>
           <th ng-hide="hideButton" class="action-keys-column">Action</th>
   			</tr>
@@ -45,10 +47,11 @@
   				<td>{{item.type}}</td>
   				<td>{{item.dealer}}</td>
           <td>{{item.price}}</td>
+          <td>{{item.priceWithGst}}</td>
           <td>{{item.createDate | date:"dd,MMMM-yyyy(EEE)"}}</td>
   				<td ng-hide="hideButton" class="action-keys-column">
   				      <center>
-                  <button ng-click="deleteDetail(item)" class="btn btn-danger">Delete</button>
+                  <button ng-click="deleteDetail(item)" class="btn btn-danger btn-sm">Delete</button>
                 </center>
   				</td>
   			</tr>
