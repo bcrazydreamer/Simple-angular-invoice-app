@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<style type="text/css">
+	table, th, td {
+		margin-top: 20px;
+	  	border: 1px solid black;
+	  	border-collapse: collapse;
+	}
+	th, td {
+	  	padding: 5px;
+	  	text-align: left;
+	}
+	select > .placeholder {
+	  display: none;
+	}
+</style>
+<body ng-app="testApp" ng-controller="myCtrl">
+
+<div ng-include="'includefile.html'"></div>
+
+<script type="text/javascript">
+	var app = angular.module("testApp",[]).filter("testing",function(){
+		return "abcd";
+	});
+	var ctrlfxn = function($scope,$timeout){
+		var abc = [
+		{name:"abcd",agree:0,disagree:0},
+		{name:"befgh",agree:0,disagree:0},
+		{name:"clalala",agree:0,disagree:0},
+		{name:"d",agree:0,disagree:0},
+		{name:"e",agree:0,disagree:0},
+		{name:"f",agree:0,disagree:0},
+		{name:"g",agree:0,disagree:0},
+		{name:"h",agree:0,disagree:0}
+		];
+		$scope.aa = abc;
+		$scope.limit = 100;
+		$scope.strict = false;
+		$scope.agreeVote = function(user){
+			user.agree++;
+		}
+		$scope.disagreeVote = function(user){
+			user.disagree++;
+		}
+		$scope.exactMatch = false;
+		$scope.exactMatchOption = function(){
+			if($scope.exactMatch==false){
+				$scope.exactMatch=true;
+			}else{
+				$scope.exactMatch=false;
+			}
+		}
+		$scope.search = function(item){
+			if($scope.searchText == undefined || $scope.searchText.trim() == ""){
+				return true;
+			}else{
+				var atIndex = item.name.indexOf($scope.searchText.trim().toLowerCase());
+				console.log(atIndex);
+				if(atIndex == 0){
+					return true;
+				}else{
+					return false;
+				}
+			}
+		}
+	}
+	app.controller("myCtrl",ctrlfxn);
+
+</script>
+
+</body>
+</html>

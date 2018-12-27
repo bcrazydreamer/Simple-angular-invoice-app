@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+
+<body ng-app="showBillingApp" ng-controller="showBillController">
+<div class="popupboxbody">
+  <div class="popupbox allSides">
+    <div class="col-sm-12 pop-message">
+      <center>
+        <h1 style="overflow:scroll">{{popmessage}}</h1>
+        <button class="btn btn-danger btn-sm" onclick="closepop()">Close</button>
+      </center>
+    </div>
+  </div>
+</div>
+  <center>
+  	<input type="text" class="custom-input" ng-model="searchText" placeholder="Global search">
+  	<input type="text" class="custom-input" ng-model="searchText.itemname" placeholder="Search by name">
+  	<input type="text" class="custom-input" ng-model="searchText.type" placeholder="Search by type">
+    <input type="checkbox" ng-model="hideButton">Hide Buttons
+    <br />
+    <button class="btn btn-primary btn-sm refresh-btn allSides" ng-click="refreshList()">Refresh</button>
+    <button class="btn btn-primary btn-sm print-btn allSides" onclick="printTable()">Print</button>
+  	<table class="table table-hover allSides" id="invoiceTable">
+  		<thead>
+  			<tr>
+  				<th>Product Name</th>
+          <th>Type</th>
+          <th>Dealer</th>
+          <th>Price</th>
+          <th>Entry Date</th>
+          <th ng-hide="hideButton" class="action-keys-column">Action</th>
+  			</tr>
+  		</thead>
+  		<tbody>
+  			<tr ng-repeat="item in allitem | limitTo:limit | filter:searchText" class="{{'cc'+item._id}} allSidesSoft">
+  				<td>{{item.itemname}}</td>
+  				<td>{{item.type}}</td>
+  				<td>{{item.dealer}}</td>
+          <td>{{item.price}}</td>
+          <td>{{item.createDate | date:"dd,MMMM-yyyy(EEE)"}}</td>
+  				<td ng-hide="hideButton" class="action-keys-column">
+  				      <center>
+                  <button ng-click="deleteDetail(item)" class="btn btn-danger">Delete</button>
+                </center>
+  				</td>
+  			</tr>
+  		</tbody>
+  	</table>
+  </center>
+
+<script src="/javascripts/print.js"></script>
+<script src="/javascripts/main2.js"></script>
+
+</body>
+</html>

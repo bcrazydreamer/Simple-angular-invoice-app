@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+
+<body ng-app="billingApp" ng-controller="billController">
+	<div class="popupboxbody">
+	  <div class="popupbox allSides">
+	    <div class="col-sm-12 pop-message">
+	      <center>
+	        <h1 style="overflow:scroll">{{popmessage}}</h1>
+	        <button class="btn btn-danger btn-sm" onclick="closepop()">Close</button>
+	      </center>
+	    </div>
+	  </div>
+	</div>
+	<div class="show-container">
+		<div class="col-sm-8 col-sm-offset-2 product-name-flash">
+			<h2>{{item.itemname}}</h2>
+		</div>
+		<div class="col-sm-8 col-sm-offset-2 price-name-flash">
+			<h1>₹ {{item.price}}</h1>
+		</div>
+	</div>
+	<div class="col-sm-8 col-sm-offset-2 allSides form-container">
+	    <div class="page-header" style="margin-top:0"><h2>Save Invoice</h2></div>
+	    <!-- FORM -->
+	    <form name="userForm" ng-submit="submitForm()">
+	    <div class="form-group">
+	        <label>Product Name</label>
+	        <input type="text" name="itemname" class="form-control" ng-model="item.itemname" required>
+	    </div>
+	    <div class="form-group">
+	        <label>Type</label>
+					<select class="form-control" ng-model="item.type">
+						<option value="" disabled selected class="select-placeholder">Select Product Type</option>
+						<option>Grocery</option>
+						<option>Cloths</option>
+						<option>Footwear</option>
+						<option>Electronics</option>
+					</select>
+	    </div>
+			<div class="form-group">
+	        <label>Dealer</label>
+					<select class="form-control" ng-model="item.dealer">
+						<option value="" disabled selected class="select-placeholder">Select Dealer</option>
+						<div>
+							<option>NepSho</option>
+							<option>Amazon</option>
+							<option>Flipkart</option>
+							<option>Snapdeal</option>
+						</div>
+					</select>
+	    </div>
+	    <div class="form-group">
+	        <label>Price</label>
+	        <input type="text" name="price" class="form-control" ng-model="item.price" ng-pattern="priceValidation" id="price-validation-ui" onkeyup="validatePrice(this)" required>
+					<span ng-show="userForm.price.$error.pattern" style="color:rgb(255, 60, 43)">Invalid price</span>
+			</div>
+	    <button type="submit" class="btn btn-primary">Submit</button>
+	    </form>
+	</div>
+
+
+<script src="/javascripts/main.js"></script>
+
+</body>
+</html>

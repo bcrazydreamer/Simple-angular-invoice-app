@@ -1,0 +1,37 @@
+<center>
+	<input type="text" ng-model="searchText" placeholder="Global Search">
+	<input type="text" ng-model="searchText.name">
+	<input type="text" ng-model="searchText.agree">
+	<input type="checkbox" ng-model="testhide">ExactMatch
+	<table>
+		<thead>
+			<tr>
+				<th>
+					Name
+				</th>
+				<th>
+					Agree
+				</th>
+				<th>
+					Disagree
+				</th>
+				<th ng-hide="testhide">
+					Vote
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="user in aa | limitTo:limit | filter:search">
+				<td>{{user.name}}</td>
+				<td>{{user.agree}}</td>
+				<td>{{user.disagree}}</td>
+				<td ng-hide="testhide">
+					<button ng-click="agreeVote(user)">Agree</button>
+					<button ng-click="disagreeVote(user)">Disagree</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+
+</center>
